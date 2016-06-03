@@ -1,4 +1,4 @@
-package goes;
+package goes
 
 import (
 	"github.com/nu7hatch/gouuid"
