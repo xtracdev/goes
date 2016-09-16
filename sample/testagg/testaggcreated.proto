@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package testagg;
+
+message TestAggCreated {
+    string aggregateId = 1;
+    string foo = 2;
+    string bar = 3;
+    string baz = 4;
+}

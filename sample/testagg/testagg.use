@@ -1,0 +1,11 @@
+model TestAggs
+
+class TestAgg
+attributes
+    Foo: String
+    Bar: String
+    Baz: String
+operations
+    NewTestAgg():TestAgg
+    UpdateFoo(newFooVal:String)
+end
