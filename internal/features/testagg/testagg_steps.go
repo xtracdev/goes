@@ -1,7 +1,7 @@
 package testagg
 
 import (
-	. "github.com/lsegal/gucumber"
+	. "github.com/gucumber/gucumber"
 	"github.com/xtraclabs/goes/sample/testagg"
 
 	"github.com/xtraclabs/goes"
