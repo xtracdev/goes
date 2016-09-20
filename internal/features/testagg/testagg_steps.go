@@ -2,11 +2,11 @@ package testagg
 
 import (
 	. "github.com/gucumber/gucumber"
-	"github.com/xtraclabs/goes/sample/testagg"
+	"github.com/xtracdev/goes/sample/testagg"
 
-	"github.com/xtraclabs/goes"
+	"github.com/xtracdev/goes"
 	"github.com/stretchr/testify/assert"
-	"github.com/xtraclabs/goes/inmems"
+	"github.com/xtracdev/goes/inmems"
 )
 
 func init() {

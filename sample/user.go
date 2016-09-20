@@ -1,7 +1,7 @@
 package sample
 
 import (
-	"github.com/xtraclabs/goes"
+	"github.com/xtracdev/goes"
 	"log"
 )
 

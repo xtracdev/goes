@@ -2,10 +2,10 @@ package benchmark
 
 import (
 	"testing"
-	"github.com/xtraclabs/goes"
-	"github.com/xtraclabs/goes/sample"
+	"github.com/xtracdev/goes"
+	"github.com/xtracdev/goes/sample"
 	"fmt"
-	"github.com/xtraclabs/goes/inmems"
+	"github.com/xtracdev/goes/inmems"
 )
 
 var eventStore goes.EventStore = inmemes.NewInMemoryEventStore()

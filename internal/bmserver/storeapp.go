@@ -3,12 +3,12 @@ package main
 import (
 	"net/http"
 	"log"
-	"github.com/xtraclabs/goes"
+	"github.com/xtracdev/goes"
 	"fmt"
 	"strconv"
-	"github.com/xtraclabs/goes/sample"
+	"github.com/xtracdev/goes/sample"
 	_ "net/http/pprof"
-	"github.com/xtraclabs/goes/inmems"
+	"github.com/xtracdev/goes/inmems"
 )
 
 var (

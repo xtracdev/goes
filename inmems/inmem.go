@@ -2,7 +2,7 @@ package inmemes
 
 import (
 	"errors"
-	"github.com/xtraclabs/goes"
+	"github.com/xtracdev/goes"
 	"sync"
 )
 

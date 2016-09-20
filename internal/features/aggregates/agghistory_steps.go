@@ -1,8 +1,8 @@
 package aggregates
 
 import (
-	"github.com/xtraclabs/goes"
-	"github.com/xtraclabs/goes/sample"
+	"github.com/xtracdev/goes"
+	"github.com/xtracdev/goes/sample"
 	. "github.com/gucumber/gucumber"
 	"github.com/stretchr/testify/assert"
 )

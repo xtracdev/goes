@@ -3,7 +3,7 @@ package testagg
 import (
 	"errors"
 	"github.com/golang/protobuf/proto"
-	"github.com/xtraclabs/goes"
+	"github.com/xtracdev/goes"
 	log "github.com/Sirupsen/logrus"
 )
 
