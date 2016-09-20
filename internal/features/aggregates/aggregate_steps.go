@@ -1,9 +1,9 @@
 package aggregates
 
 import (
-	"github.com/xtracdev/goes/sample"
 	. "github.com/gucumber/gucumber"
 	"github.com/stretchr/testify/assert"
+	"github.com/xtracdev/goes/sample"
 )
 
 var u1, u2 *sample.User
@@ -34,4 +34,3 @@ func init() {
 		assert.Equal(T, u2.ID, u2.Events[0].Source)
 	})
 }
-

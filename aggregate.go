@@ -5,14 +5,14 @@ import (
 )
 
 //Aggregate represents data every persistent domain object or aggregate object
-//must track for event sourcing. 
+//must track for event sourcing.
 type Aggregate struct {
 	ID      string
 	Events  []Event
 	Version int
 }
 
-//NewAggregate returns a pointer to an Aggregate initialized with a 
+//NewAggregate returns a pointer to an Aggregate initialized with a
 //uique ID
 func NewAggregate() *Aggregate {
 	return &Aggregate{

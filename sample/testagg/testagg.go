@@ -2,9 +2,9 @@ package testagg
 
 import (
 	"errors"
+	log "github.com/Sirupsen/logrus"
 	"github.com/golang/protobuf/proto"
 	"github.com/xtracdev/goes"
-	log "github.com/Sirupsen/logrus"
 )
 
 var ErrUnknownType = errors.New("Unknown event type")
@@ -117,7 +117,6 @@ func (ta *TestAgg) handleTestAggCreated(event TestAggCreated) {
 func (ta *TestAgg) handleTestFooUpdate(event TestAggFooUpdated) {
 	ta.Foo = event.NewFoo
 }
-
 
 //Required implementation of the Store method.
 func (ta *TestAgg) Store(eventStore goes.EventStore) error {

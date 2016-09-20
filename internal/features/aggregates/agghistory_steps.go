@@ -1,10 +1,10 @@
 package aggregates
 
 import (
-	"github.com/xtracdev/goes"
-	"github.com/xtracdev/goes/sample"
 	. "github.com/gucumber/gucumber"
 	"github.com/stretchr/testify/assert"
+	"github.com/xtracdev/goes"
+	"github.com/xtracdev/goes/sample"
 )
 
 func init() {
@@ -51,4 +51,3 @@ func init() {
 	})
 
 }
-

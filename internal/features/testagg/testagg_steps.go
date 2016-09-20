@@ -4,8 +4,8 @@ import (
 	. "github.com/gucumber/gucumber"
 	"github.com/xtracdev/goes/sample/testagg"
 
-	"github.com/xtracdev/goes"
 	"github.com/stretchr/testify/assert"
+	"github.com/xtracdev/goes"
 	"github.com/xtracdev/goes/inmems"
 )
 
@@ -15,8 +15,8 @@ func init() {
 
 	Given(`^a TestAgg aggregate$`, func() {
 		var err error
-		ta,err = testagg.NewTestAgg("f","b","b")
-		assert.Nil(T,err)
+		ta, err = testagg.NewTestAgg("f", "b", "b")
+		assert.Nil(T, err)
 	})
 
 	And(`^an event store for storing TestAgg events$`, func() {
@@ -43,9 +43,9 @@ func init() {
 		events, err := eventStore.RetrieveEvents(ta.ID)
 		assert.Nil(T, err)
 		retTestAgg := testagg.NewTestAggFromHistory(events)
-		assert.Equal(T, "f",retTestAgg.Foo)
-		assert.Equal(T, "b",retTestAgg.Bar)
-		assert.Equal(T, "b",retTestAgg.Baz)
+		assert.Equal(T, "f", retTestAgg.Foo)
+		assert.Equal(T, "b", retTestAgg.Bar)
+		assert.Equal(T, "b", retTestAgg.Baz)
 	})
 
 	When(`^I update foo$`, func() {
@@ -75,4 +75,3 @@ func init() {
 	})
 
 }
-

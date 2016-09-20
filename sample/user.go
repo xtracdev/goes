@@ -44,7 +44,7 @@ func NewUser(first, last, email string) (*User, error) {
 	return user, nil
 }
 
-//NewUserFromHistory instantiates a User and applies its event history to derive the current 
+//NewUserFromHistory instantiates a User and applies its event history to derive the current
 //state of hte aggregate.
 func NewUserFromHistory(events []goes.Event) *User {
 	user := new(User)
@@ -93,7 +93,6 @@ func (u *User) UpdateFirstName(first string) {
 			},
 		})
 }
-
 
 func (u *User) handleUserCreated(event UserCreated) {
 	u.Aggregate.ID = event.AggregateId

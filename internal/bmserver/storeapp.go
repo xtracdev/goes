@@ -1,20 +1,20 @@
 package main
 
 import (
-	"net/http"
-	"log"
-	"github.com/xtracdev/goes"
 	"fmt"
-	"strconv"
-	"github.com/xtracdev/goes/sample"
-	_ "net/http/pprof"
+	"github.com/xtracdev/goes"
 	"github.com/xtracdev/goes/inmems"
+	"github.com/xtracdev/goes/sample"
+	"log"
+	"net/http"
+	_ "net/http/pprof"
+	"strconv"
 )
 
 var (
 	eventStore goes.EventStore = inmemes.NewInMemoryEventStore()
-	aggCount = 0
-	eventCount = 0
+	aggCount                   = 0
+	eventCount                 = 0
 )
 
 func statsHandler(rw http.ResponseWriter, req *http.Request) {
@@ -25,13 +25,13 @@ func statsHandler(rw http.ResponseWriter, req *http.Request) {
 func benchHandler(rw http.ResponseWriter, req *http.Request) {
 	numAggregates, err := strconv.Atoi(req.FormValue("aggs"))
 	if err != nil {
-		http.Error(rw,err.Error(), http.StatusBadRequest)
+		http.Error(rw, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	eventsPerAgg,err := strconv.Atoi(req.FormValue("eventsPerAgg"))
+	eventsPerAgg, err := strconv.Atoi(req.FormValue("eventsPerAgg"))
 	if err != nil {
-		http.Error(rw,err.Error(), http.StatusBadRequest)
+		http.Error(rw, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -42,17 +42,16 @@ func benchHandler(rw http.ResponseWriter, req *http.Request) {
 		user, _ := sample.NewUser("first", "last", "email")
 		eventCount++ //NewUser generates a create event
 
-
 		//We create eventsPerAgg - 1 because creating an aggregate means a create event
 		//has been generated
-		for j := 0; j < eventsPerAgg - 1; j++ {
+		for j := 0; j < eventsPerAgg-1; j++ {
 			eventCount++
 			user.UpdateFirstName("u1 new first")
 		}
 
 		err = user.Store(eventStore)
 		if err != nil {
-			http.Error(rw,err.Error(), http.StatusInternalServerError)
+			http.Error(rw, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	}

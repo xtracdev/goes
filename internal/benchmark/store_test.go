@@ -1,11 +1,11 @@
 package benchmark
 
 import (
-	"testing"
-	"github.com/xtracdev/goes"
-	"github.com/xtracdev/goes/sample"
 	"fmt"
+	"github.com/xtracdev/goes"
 	"github.com/xtracdev/goes/inmems"
+	"github.com/xtracdev/goes/sample"
+	"testing"
 )
 
 var eventStore goes.EventStore = inmemes.NewInMemoryEventStore()
@@ -24,5 +24,5 @@ func BenchmarkStoreAgg(b *testing.B) {
 		user.Store(eventStore)
 	}
 
-	fmt.Println("Exit after",b.N, "iterations")
+	fmt.Println("Exit after", b.N, "iterations")
 }
