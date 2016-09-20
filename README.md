@@ -1,5 +1,7 @@
 # Go Event Sourcing
 
+[ ![Codeship Status for xtracdev/goes](https://codeship.com/projects/080cd110-6196-0134-2c55-72a4f11d695c/status?branch=master)](https://codeship.com/projects/174864)
+
 This project defines the base types and interfaces for working with event sourcing. The approach for this and related projects is loosely defined - packages using event sourcing are responsible for proving certain methods and observing conventions, as opposed to having a general framework that provides the hooks for packages to tap into for event sourcing.
 
 ## Go Event Source Sample
@@ -28,7 +30,6 @@ go get github.com/gucumber/gucumber/cmd/gucumber
 go get github.com/stretchr/testify/assert
 go get github.com/Sirupsen/logrus
 go get github.com/nu7hatch/gouuid
-go get github.com/lib/pq
 go get -u github.com/golang/protobuf/protoc-gen-go
 </pre>
 
