@@ -36,7 +36,7 @@ func init() {
 	})
 
 	Then(`^the instance state is correct$`, func() {
-		assert.Equal(T, "123", userFromHistory.ID)
+		assert.Equal(T, "123", userFromHistory.AggregateID)
 		assert.Equal(T, "new first", userFromHistory.FirstName)
 		assert.Equal(T, "orig last", userFromHistory.LastName)
 		assert.Equal(T, "orig@email.com", userFromHistory.Email)

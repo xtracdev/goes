@@ -2,8 +2,9 @@ package inmemes
 
 import (
 	"errors"
-	"github.com/xtracdev/goes"
 	"sync"
+
+	"github.com/xtracdev/goes"
 )
 
 type subscriberStorage struct {
@@ -44,7 +45,7 @@ func (im *InMemoryEventStore) StoreEvents(agg *goes.Aggregate) error {
 	defer im.Unlock()
 
 	//Do we have events for this aggregate?
-	aggStorage, ok := im.storage[agg.ID]
+	aggStorage, ok := im.storage[agg.AggregateID]
 	if !ok {
 		aggStorage = eventStorage{}
 	}
@@ -61,7 +62,7 @@ func (im *InMemoryEventStore) StoreEvents(agg *goes.Aggregate) error {
 		im.publishEvent(e)
 	}
 
-	im.storage[agg.ID] = aggStorage
+	im.storage[agg.AggregateID] = aggStorage
 
 	return nil
 }
