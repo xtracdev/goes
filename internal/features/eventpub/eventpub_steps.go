@@ -33,7 +33,7 @@ func init() {
 	})
 
 	Then(`^no events are published$`, func() {
-		eventHistory, _ := eventStore.RetrieveEvents(user.ID)
+		eventHistory, _ := eventStore.RetrieveEvents(user.AggregateID)
 		sample.NewUserFromHistory(eventHistory)
 		assert.Equal(T, 2, len(events))
 	})

@@ -2,6 +2,7 @@ package testagg
 
 import (
 	"errors"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/golang/protobuf/proto"
 	"github.com/xtracdev/goes"
@@ -34,7 +35,7 @@ func NewTestAgg(foo, bar, baz string) (*TestAgg, error) {
 	testAgg.Version = 1
 
 	testAggCreated := TestAggCreated{
-		AggregateId: testAgg.ID,
+		AggregateId: testAgg.AggregateID,
 		Foo:         foo,
 		Bar:         bar,
 		Baz:         baz,
@@ -42,7 +43,7 @@ func NewTestAgg(foo, bar, baz string) (*TestAgg, error) {
 
 	testAgg.Apply(
 		goes.Event{
-			Source:  testAgg.ID,
+			Source:  testAgg.AggregateID,
 			Version: testAgg.Version,
 			Payload: testAggCreated,
 		})
@@ -78,10 +79,10 @@ func (ta *TestAgg) UpdateFoo(newfoo string) {
 	ta.Version += 1
 	ta.Apply(
 		goes.Event{
-			Source:  ta.ID,
+			Source:  ta.AggregateID,
 			Version: ta.Version,
 			Payload: TestAggFooUpdated{
-				AggregateId: ta.ID,
+				AggregateId: ta.AggregateID,
 				NewFoo:      newfoo,
 			},
 		})
@@ -108,7 +109,7 @@ func (ta *TestAgg) Route(event goes.Event) {
 }
 
 func (ta *TestAgg) handleTestAggCreated(event TestAggCreated) {
-	ta.ID = event.AggregateId
+	ta.AggregateID = event.AggregateId
 	ta.Foo = event.Foo
 	ta.Bar = event.Bar
 	ta.Baz = event.Baz
@@ -129,9 +130,9 @@ func (ta *TestAgg) Store(eventStore goes.EventStore) error {
 	log.Debug("Storing ", len(ta.Events), " events.")
 
 	aggregateToStore := &goes.Aggregate{
-		ID:      ta.ID,
-		Version: ta.Version,
-		Events:  marshalled,
+		AggregateID: ta.AggregateID,
+		Version:     ta.Version,
+		Events:      marshalled,
 	}
 
 	err = eventStore.StoreEvents(aggregateToStore)

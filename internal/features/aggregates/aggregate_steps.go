@@ -21,7 +21,7 @@ func init() {
 	})
 
 	Then(`^the instances have unique IDs$`, func() {
-		assert.NotEqual(T, u1.ID, u2.ID, "IDs were not unique")
+		assert.NotEqual(T, u1.AggregateID, u2.AggregateID, "IDs were not unique")
 	})
 
 	And(`^there's an uncommitted event$`, func() {
@@ -30,7 +30,7 @@ func init() {
 	})
 
 	And(`^the uncommited event's source ID is the aggregate ID$`, func() {
-		assert.Equal(T, u1.ID, u1.Events[0].Source)
-		assert.Equal(T, u2.ID, u2.Events[0].Source)
+		assert.Equal(T, u1.AggregateID, u1.Events[0].Source)
+		assert.Equal(T, u2.AggregateID, u2.Events[0].Source)
 	})
 }

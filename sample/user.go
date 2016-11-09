@@ -1,8 +1,9 @@
 package sample
 
 import (
-	"github.com/xtracdev/goes"
 	"log"
+
+	"github.com/xtracdev/goes"
 )
 
 //To be event sourced...
@@ -31,10 +32,10 @@ func NewUser(first, last, email string) (*User, error) {
 	user.Version = 1
 	user.Apply(
 		goes.Event{
-			Source:  user.ID,
+			Source:  user.AggregateID,
 			Version: user.Version,
 			Payload: UserCreated{
-				AggregateId: user.ID,
+				AggregateId: user.AggregateID,
 				FirstName:   first,
 				LastName:    last,
 				Email:       email,
@@ -85,7 +86,7 @@ func (u *User) UpdateFirstName(first string) {
 	u.Version++
 	u.Apply(
 		goes.Event{
-			Source:  u.ID,
+			Source:  u.AggregateID,
 			Version: u.Version,
 			Payload: UserFirstNameUpdated{
 				OldFirst: u.FirstName,
@@ -95,7 +96,7 @@ func (u *User) UpdateFirstName(first string) {
 }
 
 func (u *User) handleUserCreated(event UserCreated) {
-	u.Aggregate.ID = event.AggregateId
+	u.Aggregate.AggregateID = event.AggregateId
 	u.FirstName = event.FirstName
 	u.LastName = event.LastName
 	u.Email = event.Email

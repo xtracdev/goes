@@ -34,13 +34,13 @@ func init() {
 	})
 
 	Then(`^the events for the TestAgg aggregate can be retrieved$`, func() {
-		eventSets, err := eventStore.RetrieveEvents(ta.ID)
+		eventSets, err := eventStore.RetrieveEvents(ta.AggregateID)
 		assert.Nil(T, err)
 		assert.Equal(T, 1, len(eventSets), "Expected one event set to be retrieved")
 	})
 
 	And(`^the TestAgg aggregate state can be recreated using the events$`, func() {
-		events, err := eventStore.RetrieveEvents(ta.ID)
+		events, err := eventStore.RetrieveEvents(ta.AggregateID)
 		assert.Nil(T, err)
 		retTestAgg := testagg.NewTestAggFromHistory(events)
 		assert.Equal(T, "f", retTestAgg.Foo)
@@ -60,17 +60,17 @@ func init() {
 		err := ta.Store(eventStore)
 		assert.Nil(T, err)
 		assert.Equal(T, 0, len(ta.Events))
-		events, err := eventStore.RetrieveEvents(ta.ID)
+		events, err := eventStore.RetrieveEvents(ta.AggregateID)
 		assert.Nil(T, err)
 		retTestAgg := testagg.NewTestAggFromHistory(events)
 		assert.Equal(T, 2, retTestAgg.Version, "Rebuilt TestAgg version not expected value of 2")
 	})
 
 	And(`^all the events in the Test event history have the aggregate id as their source$`, func() {
-		events, err := eventStore.RetrieveEvents(ta.ID)
+		events, err := eventStore.RetrieveEvents(ta.AggregateID)
 		assert.Nil(T, err)
 		for _, e := range events {
-			assert.Equal(T, ta.ID, e.Source)
+			assert.Equal(T, ta.AggregateID, e.Source)
 		}
 	})
 

@@ -33,13 +33,13 @@ func init() {
 	})
 
 	Then(`^the events for that aggregate can be retrieved$`, func() {
-		eventSets, err := eventStore.RetrieveEvents(user.ID)
+		eventSets, err := eventStore.RetrieveEvents(user.AggregateID)
 		assert.Nil(T, err)
 		assert.Equal(T, 1, len(eventSets), "Expected one event set to be retrieved")
 	})
 
 	And(`^the aggregate state can be recreated using the events$`, func() {
-		events, err := eventStore.RetrieveEvents(user.ID)
+		events, err := eventStore.RetrieveEvents(user.AggregateID)
 		assert.Nil(T, err)
 		retUser := sample.NewUserFromHistory(events)
 		assert.NotNil(T, retUser)
@@ -61,14 +61,14 @@ func init() {
 	})
 
 	When(`^the events for an aggregate are retrieved$`, func() {
-		events, err := eventStore.RetrieveEvents(user2.ID)
+		events, err := eventStore.RetrieveEvents(user2.AggregateID)
 		assert.Nil(T, err)
 		assert.Equal(T, 2, len(events))
 
 	})
 
 	Then(`^only the events associated with the specific aggregate are retrieved$`, func() {
-		events, err := eventStore.RetrieveEvents(user2.ID)
+		events, err := eventStore.RetrieveEvents(user2.AggregateID)
 		assert.Nil(T, err)
 		retUser := sample.NewUserFromHistory(events)
 		assert.NotNil(T, retUser)
@@ -87,7 +87,7 @@ func init() {
 
 	And(`^the aggregate version is correct when built from event history$`, func() {
 		user.Store(eventStore)
-		events, err := eventStore.RetrieveEvents(user.ID)
+		events, err := eventStore.RetrieveEvents(user.AggregateID)
 		assert.Nil(T, err)
 		retUser := sample.NewUserFromHistory(events)
 		assert.Equal(T, 2, retUser.Version, "Expected retrieved user to be at version 2")
@@ -111,10 +111,10 @@ func init() {
 	})
 
 	And(`^all the events in the event history have the aggregate id as their source$`, func() {
-		events, err := eventStore.RetrieveEvents(user.ID)
+		events, err := eventStore.RetrieveEvents(user.AggregateID)
 		assert.Nil(T, err)
 		for _, e := range events {
-			assert.Equal(T, user.ID, e.Source)
+			assert.Equal(T, user.AggregateID, e.Source)
 		}
 	})
 
