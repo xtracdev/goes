@@ -30,8 +30,12 @@ type TestAgg struct {
 //Factory method for instantiating the aggregate, which is also the command method for 'create'
 func NewTestAgg(foo, bar, baz string) (*TestAgg, error) {
 	//Do validation... return an error if there's a problem
+	agg, err := goes.NewAggregate()
+	if err != nil {
+		return nil, err
+	}
 	var testAgg = new(TestAgg)
-	testAgg.Aggregate = goes.NewAggregate()
+	testAgg.Aggregate = agg
 	testAgg.Version = 1
 
 	testAggCreated := TestAggCreated{
@@ -58,7 +62,8 @@ func NewTestAggFromHistory(events []goes.Event) *TestAgg {
 	}
 
 	testAgg := new(TestAgg)
-	testAgg.Aggregate = goes.NewAggregate()
+	agg, _ := goes.NewAggregate()
+	testAgg.Aggregate = agg
 
 	unmarshalledEvents, err := unmarshallEvents(events)
 	if err != nil {

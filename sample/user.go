@@ -26,8 +26,12 @@ type User struct {
 //NewUser instantiates an instance of User, and initializes the embedded aggregate structure.
 func NewUser(first, last, email string) (*User, error) {
 	//Do validation... return an error if there's a problem
+	agg, err := goes.NewAggregate()
+	if err != nil {
+		return nil, err
+	}
 	var user = new(User)
-	user.Aggregate = goes.NewAggregate()
+	user.Aggregate = agg
 
 	user.Version = 1
 	user.Apply(
@@ -49,7 +53,8 @@ func NewUser(first, last, email string) (*User, error) {
 //state of hte aggregate.
 func NewUserFromHistory(events []goes.Event) *User {
 	user := new(User)
-	user.Aggregate = goes.NewAggregate()
+	agg, _ := goes.NewAggregate()
+	user.Aggregate = agg
 
 	for _, e := range events {
 		log.Println("apply event", e)

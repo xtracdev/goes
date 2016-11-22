@@ -85,7 +85,8 @@ func (im *InMemoryEventStore) RetrieveEvents(aggregateID string) ([]goes.Event, 
 func (im *InMemoryEventStore) SubscribeEvents(callback goes.EventPublishedCallback) goes.SubscriptionID {
 	im.Lock()
 	defer im.Unlock()
-	subscriptionID := goes.SubscriptionID(goes.GenerateID())
+	id, _ := goes.GenerateID()
+	subscriptionID := goes.SubscriptionID(id)
 	im.subscribers = append(im.subscribers, subscriberStorage{subscriberID: subscriptionID, callback: callback})
 	return subscriptionID
 

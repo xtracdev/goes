@@ -1,7 +1,7 @@
 package goes
 
 import (
-	"github.com/nu7hatch/gouuid"
+	"github.com/xtracdev/goes/uuid"
 )
 
 //Aggregate represents data every persistent domain object or aggregate object
@@ -14,14 +14,21 @@ type Aggregate struct {
 
 //NewAggregate returns a pointer to an Aggregate initialized with a
 //uique ID
-func NewAggregate() *Aggregate {
-	return &Aggregate{
-		AggregateID: GenerateID(),
+func NewAggregate() (*Aggregate, error) {
+	aggId, err := GenerateID()
+	if err != nil {
+		return nil, err
 	}
+	return &Aggregate{
+		AggregateID: aggId,
+	}, nil
 }
 
 //GenerateID generates a unique ID using UUID v4.
-func GenerateID() string {
-	u, _ := uuid.NewV4()
-	return u.String()
+func GenerateID() (string, error) {
+	u, err := uuid.GenerateUuidV4()
+	if err != nil {
+		return "", err
+	}
+	return u, nil
 }
