@@ -105,3 +105,14 @@ func (im *InMemoryEventStore) Unsubscribe(subscriptionID goes.SubscriptionID) {
 	im.subscribers = remainingSubs
 	im.Unlock()
 }
+
+func (im *InMemoryEventStore) RepublishAllEvents() {
+	im.Lock()
+	defer im.Unlock()
+
+	for _, aggEvents := range im.storage {
+		for _, e := range aggEvents.events {
+			im.publishEvent(e)
+		}
+	}
+}
