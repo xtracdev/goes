@@ -22,7 +22,7 @@ type EventPublisher interface {
 //EventRepublisher defines the methods an event store capable of republishing
 //events must implement.
 type EventRepublisher interface {
-	RepublishAllEvents()
+	RepublishAllEvents() error
 }
 
 //EventSourced specifies the methods an event sourced domain object must

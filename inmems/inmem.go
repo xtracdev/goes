@@ -106,7 +106,8 @@ func (im *InMemoryEventStore) Unsubscribe(subscriptionID goes.SubscriptionID) {
 	im.Unlock()
 }
 
-func (im *InMemoryEventStore) RepublishAllEvents() {
+//RepublishAllEvents republishers events to subscribers.
+func (im *InMemoryEventStore) RepublishAllEvents() error {
 	im.Lock()
 	defer im.Unlock()
 
@@ -115,4 +116,6 @@ func (im *InMemoryEventStore) RepublishAllEvents() {
 			im.publishEvent(e)
 		}
 	}
+
+	return nil
 }
