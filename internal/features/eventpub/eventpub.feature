@@ -15,3 +15,8 @@ Feature: Event Publishing
         Given an event store with a registered subscriber
         When the subscriber unsubscribes
         Then previously subscribed callback is not invoked when events are published
+
+    Scenario:
+        Given a populated event store
+        When republish all events is called
+        Then the events store events are republished

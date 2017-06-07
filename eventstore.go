@@ -1,6 +1,6 @@
 package goes
 
-//EventPublishedCallback definte the type of a callback function invoked
+//EventPublishedCallback defines the type of a callback function invoked
 //on behalf of a subscriber when an event is published.
 type EventPublishedCallback func(event Event)
 
@@ -17,6 +17,12 @@ type EventStore interface {
 type EventPublisher interface {
 	SubscribeEvents(callback EventPublishedCallback) SubscriptionID
 	Unsubscribe(sub SubscriptionID)
+}
+
+//EventRepublisher defines the methods an event store capable of republishing
+//events must implement.
+type EventRepublisher interface {
+	RepublishAllEvents() error
 }
 
 //EventSourced specifies the methods an event sourced domain object must
